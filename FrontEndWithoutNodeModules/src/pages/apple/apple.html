@@ -1,0 +1,61 @@
+<!--
+  Generated template for the ApplePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Admin Channel</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-content padding class="bg">
+    <div class="h1">
+    <p>ENTER REGISTERED EMAIL</p>
+  </div>
+  
+  <form [formGroup] = "formgroup">
+      <ion-list class="hh">
+  
+        <ion-item class="kk">
+            <ion-label floating>Email</ion-label>
+            <ion-input type="Email" formControlName="dmail" [(ngModel)]="email21"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="dmail.hasError('required') && dmail.touched">
+              <p class="pp"><b>Email Is Required</b></p>
+            </ion-item>
+            <ion-item *ngIf="dmail.hasError('pattern') && dmail.touched">
+                <p class="pp"><b>Email Is InInvalid</b></p>
+              </ion-item>
+        
+         <ion-item class="kk">
+            <ion-label floating>Password</ion-label>
+            <ion-input type="password" formControlName="dpass"[(ngModel)]="pass21"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="dpass.hasError('required') && dpass.touched">
+              <p class="pp"><b>Password Is Required</b></p>
+            </ion-item>
+            <ion-item *ngIf="formgroup.controls.dpass.hasError('minlength') && formgroup.controls.dpass.touched">
+              <p class="pp"><b>Password Should not be less the 5</b></p>
+          </ion-item>
+          <ion-item *ngIf="formgroup.controls.dpass.hasError('pattern') && formgroup.controls.dpass.touched">
+            <p class="pp"><b>Password Should Have Numbers and Alphabets only</b></p>
+        </ion-item>
+  
+  
+  
+          <div padding>
+          <button ion-button [disabled]="!formgroup.valid" (click)="logindoc()" full color="danger" round>Log In</button>
+          <button ion-button full color="danger" round type="Reset">RESET</button>
+          </div>
+        
+        </ion-list>
+   </form>
+  
+  </ion-content>
+</ion-content>
