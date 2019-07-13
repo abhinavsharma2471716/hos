@@ -9,9 +9,6 @@ const saltRounds = 10;
 
 
 
-app.use(bodyparser.urlencoded({extended:false}));
-app.use(bodyparser.json());
-
 
 
 var app = express();
@@ -25,7 +22,7 @@ var con = mysql.createConnection({
     // properties
     host: 'localhost',
     user: 'root',
-    password: '12345',
+    password: '',
     database: 'hosptal'
 });
 
@@ -43,7 +40,7 @@ con.connect(function (error) {
 //Get the name of the diseases
 app.get('/diseases',(req,res)=>{
     var dis = "select name from diseases";
-    connection.query(dis,(err,rows)=>{
+    con.query(dis,(err,rows)=>{
         if(err){
             console.log(err);
             res.json({
@@ -62,7 +59,7 @@ app.get('/diseases',(req,res)=>{
 app.post("/probdiseases",(req,res)=>{
     const name = req.body.syms;
     var prob = 'select * from diseases where (Name) = ("'+name+'")';
-    connection.query(prob, (err, result)=>{
+    con.query(prob, (err, result)=>{
         if(err){
             console.log(err);
             res.json({
@@ -134,74 +131,7 @@ app.post('/adds', (req, res) => {
 
 
 
-    app.post('/add', (req, res) => {
-        //res.send('Hello World');
 
-        var pname = req.body.namep;
-        var pid = req.body.idp;
-        var ppass = req.body.passp;
-        var dname = req.body.named;
-        var dpmed = req.body.meddp;
-        var date = req.body.date1;
-
-        var sql = 'INSERT INTO haspitaltb (pname,pid,ppass,dname,dpmed,date) VALUES ("' + pname + '","' + pid + '","' + ppass + '","' + dname + '","'+ dpmed + '"," '+ date +'")';
-
-        con.query(sql, function (err, result) {
-            if (err) throw err;
-            console.log("1 record inserted");
-        });
-
-    });
-
-    
-    app.post("/logindoctor",(req,res)=>{
-        var Email = req.body.email21;
-       var Cont = req.body.pass21;
-       var sql= 'select * from admin where (email) = ("' + Email + '")';
-       con.query(sql,(err,result)=>{
-           if(result[0]!=null && result[0].pasword==Cont){
-               res.json(result)
-               console.log(result);
-           }
-           else{
-              
-               console.log(err);
-               res.json({
-                   success:false,
-                   status:400
-               })
-           }
-           })
-    })
-
-    app.post('/addstory', (req, res) => {
-        //res.send('Hello World');
-
-        var title = req.body.title1;
-        var story = req.body.story1;
-       
-
-        var sql = 'INSERT INTO article (title,story) VALUES ("' + title + '","' + story + '")';
-
-        con.query(sql, function (err, result) {
-            if (err) throw err;
-            console.log("1 story inserted");
-        });
-
-    });
- 
-    app.get('/getUsers', (req, res) => {
-        
-
-
-        var sql = 'SELECT * FROM article';
-
-        con.query(sql, function (err, result) {
-            res.send(result)
-
-            console.log(sql);
-        });
-    })
     
 
 
