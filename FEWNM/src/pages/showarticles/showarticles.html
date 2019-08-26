@@ -8,26 +8,19 @@
   <ion-navbar>
     <ion-title>Articles</ion-title>
   </ion-navbar>
- <!-- <button ion-button block (click)= "getdata()">Show Articles</button> -->
+  <!-- <button ion-button block (click)= "getdata()">Show Articles</button> -->
 </ion-header>
 
-<ion-content padding class ="bgk">
-    
-  <ion-list *ngFor ="let ress of res">
-    <ion-item text-wrap  class ="rgk">
+<ion-content padding class="bgk">
+  <!-- <ion-list *ngFor="let ress of res"> -->
+    <ion-list *ngFor="let item of items">
+    <ion-item text-wrap class="rgk">
       <ion-card>
-       
-             
-              
-           
-          <ion-card-header class="head">
-             
-        <p class="bg"><b>{{ress.title}}</b></p>
-          </ion-card-header> 
-        <p class="bgi"><b>{{ress.story}}</b></p> 
-      
+        <ion-card-header class="head">
+          <p class="bg"><b>{{item.title}}</b></p>
+        </ion-card-header>
+        <p class="bgi"><b>{{item.story}}</b></p>
       </ion-card>
-      </ion-item>
-      </ion-list>
-     
+    </ion-item>
+  </ion-list>
 </ion-content>
