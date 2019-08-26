@@ -43,4 +43,8 @@ export class ShowarticlesPage {
       console.log(this.items);
     });
   }
+
+  getDetails(item){
+    this.navCtrl.push('ArticleDetailsPage',{goat:item});
+  }
 }
