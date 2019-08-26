@@ -10,13 +10,13 @@ import { SortPipe } from '../../pipes/sort/sort';
  */
 
 @IonicPage({
-  name:"remedy"
+  name: "remedy"
 })
 @Component({
   selector: 'page-remedies',
   templateUrl: 'remedies.html',
 })
-export class RemediesPage implements OnInit{
+export class RemediesPage implements OnInit {
   // public searchTerm:string = "";
   // items: string[];
 
@@ -28,12 +28,12 @@ export class RemediesPage implements OnInit{
   column: string = 'name';
   constructor(public rest: RestApiProvider, public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController) {
   }
-  ngOnInit(){
+  ngOnInit() {
     // this.setFilteredItems();
     this.sort();
   }
 
-  setFilteredItems(){
+  setFilteredItems() {
     // this.items = this.serviceProvider.filterItems(this.searchTerm);
   }
 
@@ -42,14 +42,17 @@ export class RemediesPage implements OnInit{
     this.getCountries();
   }
 
-  getCountries(){
-    this.rest.getD().subscribe(data => this.countries = data, error => this.errorMessage = <any>error);
+  getCountries() {
+    this.rest.getD().subscribe(data => {
+      this.countries = data;
+      console.log(data);
+    }, error => this.errorMessage = <any>error);
   }
-  sort(){
+  sort() {
     this.descending = !this.descending;
     this.order = this.descending ? 1 : -1;
   }
-  open(c){
-    this.navCtrl.push('preview',{c:c});
+  open(c) {
+    this.navCtrl.push('preview', { c: c });
   }
 }

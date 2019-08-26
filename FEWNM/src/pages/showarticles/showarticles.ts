@@ -30,7 +30,7 @@ export class ShowarticlesPage {
   getdata() {
 
     var i, j;
-    this.http.get('http://localhost:4000/getUsers').subscribe(data => {
+    this.http.get('http://localhost:3000/getUsers').subscribe(data => {
       this.item = data.json();
 
       for (i = 0; i < this.item.length; i++) {

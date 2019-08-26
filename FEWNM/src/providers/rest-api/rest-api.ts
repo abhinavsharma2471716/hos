@@ -12,8 +12,8 @@ import { map, catchError } from 'rxjs/operators';
 */
 @Injectable()
 export class RestApiProvider {
-  private apiURL = 'http://localhost:5000/diseases';
-  private apiURL2 = 'http://localhost:5000/probdiseases';
+  private apiURL = 'http://localhost:3000/diseases';
+  private apiURL2 = 'http://localhost:3000/probdiseases';
 
   constructor(public http: HttpClient) {
     console.log('Hello RestApiProvider Provider');
