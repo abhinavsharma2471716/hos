@@ -1,58 +1,37 @@
-import { RestApiProvider } from './../../providers/rest-api/rest-api';
-import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-import { SortPipe } from '../../pipes/sort/sort';
-/**
- * Generated class for the HomePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { DataProvider } from './../../providers/data/data';
+import { Component } from '@angular/core';
+import { NavController,IonicPage } from 'ionic-angular';
 
-@IonicPage({
-  name: "remedy"
-})
+@IonicPage()
 @Component({
   selector: 'page-remedies',
   templateUrl: 'remedies.html',
 })
-export class RemediesPage implements OnInit {
-  // public searchTerm:string = "";
-  // items: string[];
 
-  countries: string[];
-  errorMessage: string;
+export class RemediesPage {
 
-  descending: boolean = false;
-  order: number;
-  column: string = 'name';
-  constructor(public rest: RestApiProvider, public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController) {
-  }
-  ngOnInit() {
-    // this.setFilteredItems();
-    this.sort();
+  items:any;
+  searchTerm:string = "";
+
+  constructor(public navCtrl: NavController, private ds: DataProvider) {
+
   }
 
-  setFilteredItems() {
-    // this.items = this.serviceProvider.filterItems(this.searchTerm);
+  //Initialized the 
+  ionViewWillEnter(){
+    this.setFilteredItems(); 
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
-    this.getCountries();
+  // ngOnInit(){
+  //   this.setFilteredItems();
+  // }
+
+  setFilteredItems(){
+    this.items = this.ds.filterItems(this.searchTerm);
   }
 
-  getCountries() {
-    this.rest.getD().subscribe(data => {
-      this.countries = data;
-      console.log(data);
-    }, error => this.errorMessage = <any>error);
+  open(cat){
+    this.navCtrl.push('PreviewModalPage',{getCat:cat}); //Lazy Loading by just calling the export class name
   }
-  sort() {
-    this.descending = !this.descending;
-    this.order = this.descending ? 1 : -1;
-  }
-  open(c) {
-    this.navCtrl.push('preview', { c: c });
-  }
+
 }

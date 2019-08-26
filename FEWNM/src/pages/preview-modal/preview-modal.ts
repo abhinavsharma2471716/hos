@@ -1,6 +1,6 @@
-import { RestApiProvider } from './../../providers/rest-api/rest-api';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { DataProvider } from './../../providers/data/data';
 
 /**
  * Generated class for the PreviewModalPage page.
@@ -8,38 +8,29 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
-@IonicPage({
-  name:'preview'
-})
+@IonicPage()
 @Component({
   selector: 'page-preview-modal',
   templateUrl: 'preview-modal.html',
 })
 export class PreviewModalPage {
   info:any;
-  finfo:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController,public rest: RestApiProvider) {
-    this.info = this.navParams.get('c');
+  diseases:any;
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, public ds:DataProvider) {
+    this.info = this.navParams.get('getCat');
+    console.log(this.info);
     let body = {
-      syms:this.info.name
+      nam:this.info
     }
-    this.rest.getDiseases(body).subscribe(data=>{
-      this.finfo = data;
+    this.ds.postComDis(body).subscribe(data=>{
+      this.diseases = data;
+      console.log(data);
     })
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PreviewModalPage');
+    console.log('ionViewDidLoad ProbdiseasesPage');
   }
-  //The below function was never being called
-  // gethim(){
-  //   let body = {
-  //     syms:this.info.name
-  //   }
-  //   this.rest.getDiseases(body).subscribe(data=>{
-  //     this.finfo = data;
-  //   })
-  // }
 
 }

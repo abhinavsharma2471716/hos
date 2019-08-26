@@ -19,13 +19,11 @@ import { AppointPage } from '../pages/appoint/appoint';
 import { DetailPage } from '../pages/detail/detail';
 
 import { HttpClientModule } from '@angular/common/http';
-import { RestApiProvider } from '../providers/rest-api/rest-api';
 
-import { SearchPipe } from '../pipes/search/search';
-import { SortPipe } from '../pipes/sort/sort';
 import { BananaPage } from '../pages/banana/banana';
 import { MangoPage } from '../pages/mango/mango';
 import { ApplePage } from '../pages/apple/apple';
+import { DataProvider } from '../providers/data/data';
 
 @NgModule({
   declarations: [
@@ -39,8 +37,6 @@ import { ApplePage } from '../pages/apple/apple';
     DetailPage,
     ShowarticlesPage,
     RemediesPage,
-    SearchPipe,
-    SortPipe,
     MedicinesPage,
     ApplePage,
     MangoPage,
@@ -77,7 +73,7 @@ import { ApplePage } from '../pages/apple/apple';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    RestApiProvider
+    DataProvider
   ]
 })
 export class AppModule {}
