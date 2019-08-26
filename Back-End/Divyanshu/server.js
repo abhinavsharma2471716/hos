@@ -21,9 +21,9 @@ app.use(cors());
 var con = mysql.createConnection({
     // properties
     host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'hosptal'
+    user: 'arulyan',
+    password: 'forza',
+    database: 'hospital'
 });
 
 con.connect(function (error) {
@@ -35,11 +35,52 @@ con.connect(function (error) {
 
 });
 
+//Will Start The Trial Common Problems Here:
 
+app.get('/comprobs',(req,res)=>{
+    var com = "select * from comprobs";
+    con.query(com,(err,rows)=>{
+        if(err){
+            console.log(err);
+            res.json({
+                success:false,
+                status:400
+            })
+        }
+        else{
+            console.log(rows);
+            res.json(rows);
+        }
+    })
+})
+
+//Common Problems End Here
+
+//NextPage Common Diseases and Remedies
+
+app.post("/commonprobdiseases",(req,res)=>{
+    const name = req.body.nam;
+    var prob = 'select * from comdiseases where (Category) = ("'+name+'")';
+    con.query(prob, (err, result)=>{
+        if(err){
+            console.log(err);
+            res.json({
+                success:false,
+                status:400
+            })
+        }
+        else{
+            res.json(result);
+            console.log(result);
+        }
+    })
+})
+
+//End of Common Diseases and Remedies
 
 //Get the name of the diseases
 app.get('/diseases',(req,res)=>{
-    var dis = "select name from diseases";
+    var dis = "select * from diseases";
     con.query(dis,(err,rows)=>{
         if(err){
             console.log(err);
